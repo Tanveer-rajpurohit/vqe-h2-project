@@ -49,6 +49,22 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig("results/convergence_plot.png", dpi=150)
 
+
+plt.figure(figsize=(5, 5))
+labels = ["VQE (this project)", "Exact (reference)"]
+values = [final_total_energy, exact_energy]
+colors = ["#1f77b4", "#d62728"]
+bars = plt.bar(labels, values, color=colors)
+plt.ylabel("Total molecular energy (Hartree)")
+plt.title("VQE vs Exact Ground State Energy (H$_2$)")
+plt.grid(True, axis="y", alpha=0.3)
+for bar, val in zip(bars, values):
+    plt.text(bar.get_x() + bar.get_width()/2, val - 0.05, f"{val:.4f}",
+              ha="center", va="top", color="white", fontweight="bold")
+plt.tight_layout()
+plt.savefig("results/comparison_bar_chart.png", dpi=150)
+print("Bar chart saved to results/comparison_bar_chart.png")
+
 print("Final VQE total energy:", final_total_energy, "Hartree")
 print("Exact reference energy:", exact_energy, "Hartree")
 print("Absolute error:", abs(final_total_energy - exact_energy), "Hartree")
